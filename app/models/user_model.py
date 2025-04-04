@@ -11,5 +11,5 @@ class User(Base):
     password= Column(String, unique=True)
     age = Column(Integer)
     is_active = Column(Boolean, default=True)
-    posts = relationship('Post', back_populates='creator')
+    posts = relationship('Post', back_populates='author')
 

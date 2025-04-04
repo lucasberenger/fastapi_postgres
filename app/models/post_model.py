@@ -9,6 +9,6 @@ class Post(Base):
     id = Column(Integer,primary_key=True, index=True, autoincrement=True)
     title = Column(String, index=True)
     content = Column(String)
-    creator_id = Column(Integer, ForeignKey('tb_user.id'))
-    creator = relationship('User', back_populates='posts')
+    author_id = Column(Integer, ForeignKey('tb_user.id'))
+    author = relationship('User', back_populates='posts')
     
