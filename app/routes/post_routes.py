@@ -20,3 +20,11 @@ async def get_post(post_id: int, db: Session = Depends(get_db)):
     if not post:
         raise HTTPException(status_code=404, detail="Post not found")
     return post
+
+@router.get('/user/{user_id}', response_model=List[PostResponseDTO])
+async def get_posts_by_user(user_id: int, db: Session = Depends(get_db)):
+    """"Get Posts by User ID"""
+    posts = post_service.get_posts_by_user(db, user_id)
+    if not posts:
+        raise HTTPException(status_code=404, detail="No posts found for this user")
+    return posts

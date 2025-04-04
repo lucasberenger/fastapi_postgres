@@ -13,3 +13,7 @@ def create_post(db: Session, post_data: PostCreateDTO) -> Post:
 def get_post(db: Session, post_id: int) -> Post:
     """Get Post by ID"""
     return db.query(Post).filter(Post.id == post_id).first()
+
+def get_posts_by_user(db: Session, user_id: int) -> list[Post]:
+    """Get Posts by User ID"""
+    return db.query(Post).filter(Post.author_id == user_id).all()
