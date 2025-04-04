@@ -12,3 +12,11 @@ async def create_post(post: PostCreateDTO, db: Session = Depends(get_db)):
     """ Create a new Post """
     new_post = post_service.create_post(db, post)
     return new_post
+
+@router.get('/{post_id}', response_model=PostResponseDTO)
+async def get_post(post_id: int, db: Session = Depends(get_db)):
+    """Get Post by ID"""
+    post = post_service.get_post(db, post_id)
+    if not post:
+        raise HTTPException(status_code=404, detail="Post not found")
+    return post

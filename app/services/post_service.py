@@ -10,6 +10,6 @@ def create_post(db: Session, post_data: PostCreateDTO) -> Post:
     db.refresh(db_post)
     return db_post
 
-def get_post_by_id(db: Session, post_id: int) -> Post:
+def get_post(db: Session, post_id: int) -> Post:
     """Get Post by ID"""
     return db.query(Post).filter(Post.id == post_id).first()
