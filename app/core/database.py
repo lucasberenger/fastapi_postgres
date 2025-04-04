@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from typing import Annotated
 from fastapi import Depends
 from sqlalchemy.orm import Session
-import models
+
 
 URL_DATABASE = "postgresql://testuser:testpassword@localhost:5432/testdb"
 

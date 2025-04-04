@@ -7,6 +7,11 @@ class UserCreateDTO(BaseModel):
     password: str
     age: int
 
+class UserUpdateDTO(BaseModel):
+    name: str | None = None
+    email: str | None = None
+    age: int | None = None
+
 
 class UserResponseDTO(BaseModel):
     id: int

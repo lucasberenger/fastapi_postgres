@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Boolean, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from core.database import Base
 
@@ -11,3 +11,4 @@ class Post(Base):
     content = Column(String)
     creator_id = Column(Integer, ForeignKey('tb_user.id'))
     creator = relationship('User', back_populates='posts')
+    
