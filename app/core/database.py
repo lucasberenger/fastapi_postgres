@@ -4,11 +4,14 @@ from sqlalchemy.ext.declarative import declarative_base
 from typing import Annotated
 from fastapi import Depends
 from sqlalchemy.orm import Session
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 
-URL_DATABASE = "postgresql://testuser:testpassword@localhost:5432/testdb"
+DATABASE_URL = os.getenv('DATABASE_URL')
 
-engine = create_engine(URL_DATABASE)
+engine = create_engine(DATABASE_URL)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
