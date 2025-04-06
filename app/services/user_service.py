@@ -35,6 +35,11 @@ def get_user_by_id(db: Session, user_id: int) -> User:
     return db.query(User).filter(User.id == user_id).first()
 
 
+def get_user_by_email(db: Session, email: str) -> User:
+    """Get a user by email"""
+    return db.query(User).filter(User.email == email).first()
+
+
 def delete_user(db: Session, user_id: int) -> bool:
     """Delete user by ID"""
     user = db.query(User).filter(User.id == user_id).first()
