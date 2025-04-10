@@ -1,15 +1,18 @@
-from sqlalchemy import Column, Boolean, Integer, String, ForeignKey
+from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import Column, Boolean, String
+from uuid import uuid4
 from sqlalchemy.orm import relationship
 from core.database import Base
 
 class User(Base):
-    __tablename__ = 'tb_user'
+    __tablename__ = 'tb_users'
 
-    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    id = Column(UUID(as_uuid=True), primary_key=True, index=True, default=uuid4)
     name = Column(String, index=True)
     email = Column(String, index=True)
-    password= Column(String, unique=True)
-    age = Column(Integer)
+    password_hash =  Column(String, unique=True)
     is_active = Column(Boolean, default=True)
-    posts = relationship('Post', back_populates='author')
+
+    company = relationship('Company', back_populates='user')
+    
 

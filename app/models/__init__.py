@@ -1,2 +1,1 @@
-from models.user_model import User
-from models.post_model import Post
+from models import user_model, company_model, employee_model, investment_model, expense_model, tax_model
