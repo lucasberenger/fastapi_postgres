@@ -5,8 +5,9 @@ from auth.auth_handler import create_access_token
 from core.database import get_db
 from models.user_model import User
 from schemas.user_dto import UserCreateDTO, UserResponseDTO
-from schemas.login_dto import LoginDTO
+from app.schemas.auth_dto import LoginDTO
 from services.user_service import get_user_by_email, create_user
+from auth.auth_dependencies import get_current_user
 
 router = APIRouter(prefix='/auth', tags=['Auth'])
 
@@ -29,3 +30,8 @@ async def login(user: LoginDTO, db: Session = Depends(get_db)):
 
     access_token = create_access_token(data={'sub': db_user.email})
     return {'access_token': access_token, 'token_type': 'bearer'}
+
+@router.get('/me', response_model=UserResponseDTO)
+async def get_logged_user(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    """Get current user"""
+    return current_user

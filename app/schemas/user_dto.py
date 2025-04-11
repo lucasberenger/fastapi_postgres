@@ -1,23 +1,24 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 
 
 class UserCreateDTO(BaseModel):
     name: str
-    email: str
-    password: str
-    age: int
+    email: EmailStr
+    password_hash: str
+    
+    class Config:
+        from_attributes = True
 
 class UserUpdateDTO(BaseModel):
     name: str | None = None
-    email: str | None = None
-    age: int | None = None
+    email: EmailStr | None = None
 
 
 class UserResponseDTO(BaseModel):
     id: int
     name: str
-    email: str
+    email: EmailStr
     age: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True

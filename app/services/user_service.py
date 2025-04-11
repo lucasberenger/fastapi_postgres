@@ -10,11 +10,11 @@ def get_all_users(db: Session) -> list[User]:
 
 def create_user(db: Session, user_data: UserCreateDTO) -> User:
     """Create a new user in the database."""
-    db_user = User(**user_data.model_dump())
-    db.add(db_user)
+    user = User(**user_data.model_dump())
+    db.add(user)
     db.commit() 
-    db.refresh(db_user)
-    return db_user
+    db.refresh(user)
+    return user
 
 def edit_user(db: Session,  user_id: int, user_data: UserUpdateDTO) -> User:
     """Edit a user by ID"""
