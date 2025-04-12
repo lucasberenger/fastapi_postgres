@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 from models.user_model import User
 from schemas.user_dto import UserCreateDTO, UserUpdateDTO
+from auth.auth_utils import hash_password
 
 
 def get_all_users(db: Session) -> list[User]:
@@ -10,11 +11,21 @@ def get_all_users(db: Session) -> list[User]:
 
 def create_user(db: Session, user_data: UserCreateDTO) -> User:
     """Create a new user in the database."""
-    user = User(**user_data.model_dump())
+   
+    hashed_password = hash_password(user_data.password)
+
+    user = User(
+        name=user_data.name,
+        email=user_data.email,
+        password_hash=hashed_password
+    )
+
     db.add(user)
     db.commit() 
     db.refresh(user)
     return user
+
+#TODO: testar criação de usuário
 
 def edit_user(db: Session,  user_id: int, user_data: UserUpdateDTO) -> User:
     """Edit a user by ID"""
