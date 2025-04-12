@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr
-
+from uuid import UUID
 
 class UserCreateDTO(BaseModel):
     name: str
@@ -15,7 +15,7 @@ class UserUpdateDTO(BaseModel):
 
 
 class UserResponseDTO(BaseModel):
-    id: int
+    id: UUID
     name: str
     email: EmailStr
     company: str
